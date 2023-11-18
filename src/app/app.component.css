@@ -1,0 +1,12 @@
+.app{
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 30px;
+    background: white;
+}
+div{
+    border: 1px pink none;
+}
+.logo{
+    width: 75%;
+}

@@ -11,5 +11,29 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'EchoBooks Bitacora';
+  title:string = 'EchoBooks Bitacora';
+  mensaje:string = 'Aquí Alerta';
+
+  books = [
+    {'title':'Frontera Oscura', 'author':'Sabino Cabeza', 'genere':'Fiction', 'pages':300, 'status':'Finished'}
+  ];
+  
+  model:any = {};
+  model2:any = {};
+
+  addBook():void{
+    this.books.push(this.model);
+  }
+  deleteBook():void{
+
+  }
+  updateBook():void{
+    
+  }
+  orderBook():void{
+
+  }
+  exportBook():void{
+
+  }
 }

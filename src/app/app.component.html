@@ -1,158 +1,76 @@
 <div class="container app">
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-12 mb-5">
       <h1 class="text-center">
         {{title}}
       </h1>
     </div>
-    <div class="col-sm-4">
-      <div class="alert alert-success alert-dismissable">
-        <a href="#" class="close">
-          {{mensaje}}
-        </a>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <img class="logo" src="../assets/echoBooks.png" alt="Logo">
+    </div>
+    <div class="col-sm-6 mb-4">
+      <div class="card-body">
+        <div class="card-title" *ngIf="selectBook.id == 0">
+          <h3>Create Book</h3>
+        </div>
+        <div class="card-title" *ngIf="selectBook.id !== 0">
+          <h3>Update Book</h3>
+        </div>
+        <div class="form-group p-1">
+          <input type="text" placeholder="Title (Required)" class="form-control" [(ngModel)]="selectBook.title" name="title">
+        </div>
+        <div class="form-group p-1">
+          <input type="text" placeholder="Author" class="form-control" [(ngModel)]="selectBook.author" name="author">
+        </div>
+        <div class="form-group p-1">
+          <input type="text" placeholder="Genere" class="form-control" [(ngModel)]="selectBook.genere" name="genere">
+        </div>
+        <div class="form-group p-1">
+          <input type="text" placeholder="Pages" class="form-control" [(ngModel)]="selectBook.pages" name="pages">
+        </div>
+        <div class="form-group p-1">
+          <input type="text" placeholder="Status" class="form-control" [(ngModel)]="selectBook.status" name="status">
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <button (click)="addBook()" class="btn btn-success" *ngIf="selectBook.id == 0">
+              Add
+            </button>
+            <button (click)="UpBook()" class="btn btn-success" *ngIf="selectBook.id !== 0">
+              Confirm
+            </button>
+            <button (click)="deleteBook()" class="btn btn-danger" *ngIf="selectBook.id !== 0">
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-4">
-      <img class="logo" src="../assets/echoBooks.png" alt="Logo">
+    <div class="col-sm-12">
+      <h3 class="text-center">All Books</h3>
+      <ul class="list-group">
+        <li *ngFor="let book of books" class="list-group-item list-group-item-action" (click)="editBook(book)" [class.active]="book == selectBook">
+          <span class="btn btn-primary">{{book.id}}</span> > <strong>{{book.title}}</strong> - <em>{{book.author}}</em> - <span>{{book.genere}}</span> - <span>{{book.pages}}pg</span> - <span class="text-primary">{{book.status}}</span>
+        </li>
+      </ul>
     </div>
-    <div class="col-sm-8">
-      <h2>Create New Book:</h2>
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label for="title" class="control-label col-sm-2">
-            Title: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" name="title" [(ngModel)]="model.title" placeholder="Book Title">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="author" class="control-label col-sm-2">
-            Author: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="author" name="author" [(ngModel)]="model.author" placeholder="Book Author">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="genere" class="control-label col-sm-2">
-            Genere: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="genere" name="genere" [(ngModel)]="model.genere" placeholder="Book Genere">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="pages" class="control-label col-sm-2">
-            Pages: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="pages" name="pages" [(ngModel)]="model.pages" placeholder="Book Pages">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="status" class="control-label col-sm-2">
-            Status: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="status" name="status" [(ngModel)]="model.status" placeholder="Book Status">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-10 col-sm-offset-2">
-            <button type="submit" class="btn btn-success" (click)="addBook()">
-              Create
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
+    
   </div>
   <div class="row">
-    <div class="col-sm-8">
-      <h2>All Books</h2>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>TITLE</th>
-            <th>AUTHOR</th>
-            <th>GENERE</th>
-            <th>PAGES</th>
-            <th>STATUS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let book of books; let i = index">
-            <td>{{book.title}}</td>
-            <td>{{book.author}}</td>
-            <td>{{book.genere}}</td>
-            <td>{{book.pages}}</td>
-            <td>{{book.status}}</td>
-            <td>
-              <a (click)="updateBook()" class="btn btn-success">
-                Update
-              </a>
-              <a (click)="deleteBook()" class="btn btn-warning">
-                Delete
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-sm-12 text-center mt-4">
+      <button (click)="exportBook()" class="btn btn-warning">
+        Export File
+      </button>
     </div>
-    <div class="col-sm-4">
-      <h2>Update Book:</h2>
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label for="title" class="control-label col-sm-2">
-            Title: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" name="title" [(ngModel)]="model2.title" placeholder="Book Title">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="author" class="control-label col-sm-2">
-            Author: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="author" name="author" [(ngModel)]="model2.author" placeholder="Book Author">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="genere" class="control-label col-sm-2">
-            Genere: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="genere" name="genere" [(ngModel)]="model2.genere" placeholder="Book Genere">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="pages" class="control-label col-sm-2">
-            Pages: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="pages" name="pages" [(ngModel)]="model2.pages" placeholder="Book Pages">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="status" class="control-label col-sm-2">
-            Status: 
-          </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="status" name="status" [(ngModel)]="model2.status" placeholder="Book Status">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-10 col-sm-offset-2">
-            <button type="submit" class="btn btn-success" (click)="updateBook()">
-              Update
-            </button>
-          </div>
-        </div>
-      </form>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12 mt-5 text-center">
+      <p>Powered by EchoGroup - Derechos Reservados 2023</p>
     </div>
   </div>
 </div>

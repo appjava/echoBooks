@@ -8,5 +8,6 @@ div{
     border: 1px pink none;
 }
 .logo{
-    width: 75%;
+    width: 60%;
+    min-width: 240px;
 }

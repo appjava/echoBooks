@@ -12,7 +12,7 @@ import { Book } from './models/book';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title:string = 'EchoBooks Bitacora';
+  title:string = 'Personal Librarie App';
 
   books:Book[] = [
     {id:1, title:'Frontera Oscura', author:'Sabino Cabeza', genere:'Fiction', pages:"300", status:'Finished'},
